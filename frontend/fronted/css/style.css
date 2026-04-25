@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: black;
+  color: white;
+}
+
+.logo {
+  color: red;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.btn {
+  background: white;
+  padding: 8px 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.btn-red {
+  background: red;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.auth-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  width: 300px;
+}
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: red;
+  color: white;
+  border: none;
+}
+
+.banner {
+  padding: 100px 30px;
+}
+
+.row {
+  padding: 20px;
+}
+
+.row-posters img {
+  margin-right: 10px;
+}
