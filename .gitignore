@@ -1,0 +1,28 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Node (frontend future-proof)
+node_modules/
+npm-debug.log
+
+# Environment files
+.env
+
+# XAMPP / local server files
+xampp/
+htdocs/
+
+# Uploaded content (backend)
+backend/uploads/
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated
+*.tmp
+*.swp
