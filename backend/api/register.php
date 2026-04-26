@@ -1,29 +1,38 @@
 <?php
-echo "API is working";
-?>
-<?php
 include("../config/db.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+header("Content-Type: application/json");
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$data = json_decode(file_get_contents("php://input"), true);
 
-    $check = $conn->query("SELECT * FROM users WHERE email='$email'");
+$name = $data['name'] ?? null;
+$email = $data['email'] ?? null;
+$password = $data['password'] ?? null;
 
-    if ($check->num_rows > 0) {
-        echo json_encode(["status" => "error", "message" => "Email already exists"]);
-        exit;
-    }
-
-    $sql = "INSERT INTO users (name, email, password)
-            VALUES ('$name', '$email', '$password')";
-
-    if ($conn->query($sql)) {
-        echo json_encode(["status" => "success", "message" => "User registered"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Registration failed"]);
-    }
+if(!$name || !$email || !$password){
+    echo json_encode([
+        "success" => false,
+        "message" => "Missing fields"
+    ]);
+    exit;
 }
+
+// check duplicate email
+$check = $conn->query("SELECT id FROM users WHERE email='$email'");
+if($check->num_rows > 0){
+    echo json_encode([
+        "success" => false,
+        "message" => "Email already exists"
+    ]);
+    exit;
+}
+
+// insert user
+$conn->query("INSERT INTO users (name, email, password) 
+VALUES ('$name', '$email', '$password')");
+
+echo json_encode([
+    "success" => true,
+    "message" => "User registered"
+]);
 ?>

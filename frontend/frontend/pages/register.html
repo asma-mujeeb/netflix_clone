@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="auth">
+
+<div class="form-box">
+    <h2>Register</h2>
+
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="register()">Register</button>
+
+    <p>Already have account? <a href="login.html">Login</a></p>
+</div>
+
+<script>
+function register() {
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("../../backend/api/register.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.success){
+            alert("Registered successfully");
+            window.location.href = "login.html";
+        } else {
+            alert(data.message);
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+        alert("Server error");
+    });
+}
+</script>
+
+</body>
+</html>
